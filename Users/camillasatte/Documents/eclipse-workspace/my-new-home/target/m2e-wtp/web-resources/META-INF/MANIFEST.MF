@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: camillasatte
+Build-Jdk: 11.0.2
+Implementation-Title: my-new-home
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: net.springbootapp
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/my-new-home
+Created-By: Maven Integration for Eclipse
+
