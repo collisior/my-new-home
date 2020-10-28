@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+	
+<title>New Item</title>
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
+				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
+				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
+				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
+				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<div th:if="${param.success}">
+					<div class="alert alert-info">You've successfully created new item.
+						</div>
+				</div>
+
+				<h1>Create New Item </h1>
+			  <form th:action="@{/newitem}" th:object="${item}" method="post" enctype="multipart/form-data">
+
+					<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+						th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
+						error</p>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
+						<label for="name" class="control-label">Item name</label> <input
+							id="name" class="form-control" th:field="*{name}" />
+						<p class="error-message"
+							th:each="error: ${#fields.errors('name')}"
+							th:text="${error}">Validation error</p>
+					</div>
+				  
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('details')}? 'has-error':''">
+						<label for="details" class="control-label">Item details</label> <input
+							id="details" class="form-control" th:field="*{details}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('details')}"
+							th:text="${error}">Validation error</p>
+					</div>
+				  
+				  <div class="form-group"
+						th:classappend="${#fields.hasErrors('link')}? 'has-error':''">
+						<label for="link" class="control-label">Item Link</label> <input
+							id="link" class="form-control" th:field="*{link}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('link')}"
+							th:text="${error}">Validation error</p>
+					</div>
+				  
+				  <div class="form-group"
+						th:classappend="${#fields.hasErrors('price')}? 'has-error':''">
+						<label for="price" class="control-label">Item Price</label> 
+					  <input id="price" class="form-control" th:field="*{price}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('price')}"
+							th:text="${error}">Validation error</p>
+				  </div>
+				  
+<!--
+				  <div class="form-group"
+						th:classappend="${#fields.hasErrors('price')}? 'has-error':''">
+						<label for="room_id" class="control-label">Item Room id</label> 
+					  <input id="room_id" class="form-control" th:field="*{room_id}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('room_id')}"
+							th:text="${error}">Validation error</p>
+				  </div>
+-->
+<!--
+				  <div class="form-group">
+					  <label for="room_id" class="control-label">Item Room</label> 
+					  <select id ="roomSelected" class="form-control" th:field="*{room_id}">
+							<option th:each="room : ${roomsList}" th:value="${room.id}" th:text="${room.name}">Select Room
+							</option>
+						</select>
+				  </div>
+-->
+				  
+				  
+				  <div class="form-group">
+						<label for="image" class="control-label">Item Image</label> 
+					  <input type="file" id="image" class="form-control" th:field="*{image}" accept="image/png, image/jpeg, image/jpg" />
+				  </div>
+				  
+				
+				  <br>
+				  <div class="form-group">
+					  <button type="submit" class="btn btn-success">Add Item</button>
+					  <span> <a href="/" th:href="@{/index}">Cancel here</a></span>
+				  </div>
+				  
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+	
+	
+	
+</body>
+</html>

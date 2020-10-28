@@ -1,36 +1,52 @@
 package net.springbootapp.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import net.springbootapp.model.Role;
-import net.springbootapp.model.User;
+import net.springbootapp.facade.IAuthenticationFacade;
+import net.springbootapp.model.*;
 import net.springbootapp.repository.UserRepository;
-import net.springbootapp.web.dto.UserRegistrationDto;
+import net.springbootapp.web.dto.UserRegistrationDTO;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImplementation implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired 
+	private UserService userService;
+    
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    public UserServiceImplementation(UserRepository userRepository) {
+    	this.userRepository = userRepository;
+    }
+    
     public User findByEmail(String email){
         return userRepository.findByEmail(email);
     }
 
-    public User save(UserRegistrationDto registration){
+    public User save(UserRegistrationDTO registration){
         User user = new User();
         user.setFirstName(registration.getFirstName());
         user.setLastName(registration.getLastName());
@@ -50,10 +66,41 @@ public class UserServiceImpl implements UserService {
                 user.getPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
+    
+	@RequestMapping(value = "/username", method = RequestMethod.GET)
+    @ResponseBody
+    public User getCurrentUser() {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        return userService.findByEmail(authentication.getName());
+    }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
     }
+
+	@Override
+	public List<Item> findAllItems() {
+		List<Item> items = new ArrayList<Item>();
+		User user = getCurrentUser();
+		for(Room r: user.getRooms()) {
+			for(Item i: r.getItems()) {
+				items.add(i);
+			}	
+		}
+		return items;
+	}
+
+	@Override
+	public List<Room> findAllRooms() {
+		List<Room> rooms = new ArrayList<Room>();
+		User user = getCurrentUser();
+		for(Room r: user.getRooms()) {
+			rooms.add(r);
+		}
+		return rooms;
+	}
+	
+	
 }

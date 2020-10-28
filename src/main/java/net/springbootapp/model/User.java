@@ -2,17 +2,22 @@ package net.springbootapp.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
+    @Column(name="first_name")
     private String firstName;
+    
+    @Column(name="last_name")
     private String lastName;
+    
     private String email;
     private String password;
 
@@ -25,22 +30,15 @@ public class User {
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    private Set<Room> rooms;
+    
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    private Set<Item> items;
+
     public User() {
-    }
-
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
     }
 
     public Long getId() {
@@ -91,6 +89,14 @@ public class User {
         this.roles = roles;
     }
 
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
+    }
+    
     @Override
     public String toString() {
         return "User{" +

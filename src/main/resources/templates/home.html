@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
-
-<title>Registration</title>
+	
+<title>Home</title>
 </head>
+
 <body>
+	
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -23,35 +23,31 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/rooms}">Rooms</a>
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/newroom}">New Room</a>
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/items}">Items</a>
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/newitem}">New Item</a>
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/dashboard}">Dashboard</a>
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/settings}">Settings</a>
-					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-				</ul>
+				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
+				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
+				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
+				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
+				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
 			</div>
 		</div>
 	</nav>
 
 	<br>
 	<br>
-	<div class="container">
-		<h2>My New Home App</h2>
 
-		<p>
-			Welcome <span sec:authentication="principal.username">User</span>
-		</p>
-	</div>
+	<h1>My Rooms </h1>
+	<p>
+			Rooms of <span sec:authentication="principal.username">User</span>
+	</p>
 
 	<script type="text/javascript"
 		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
 	<script type="text/javascript"
 		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-
+	
+	
+	
 </body>
 </html>

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.springbootapp.model.User;
 import net.springbootapp.service.UserService;
-import net.springbootapp.web.dto.UserRegistrationDto;
+import net.springbootapp.web.dto.UserRegistrationDTO;
 
 @Controller
 @RequestMapping("/registration")
@@ -23,8 +23,8 @@ public class UserRegistrationController {
     private UserService userService;
 
     @ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
+    public UserRegistrationDTO userRegistrationDto() {
+        return new UserRegistrationDTO();
     }
 
     @GetMapping
@@ -33,10 +33,10 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
+    public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDTO userDTO,
                                       BindingResult result){
 
-        User existing = userService.findByEmail(userDto.getEmail());
+        User existing = userService.findByEmail(userDTO.getEmail());
         if (existing != null){
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
@@ -45,7 +45,7 @@ public class UserRegistrationController {
             return "registration";
         }
 
-        userService.save(userDto);
+        userService.save(userDTO);
         return "redirect:/registration?success";
     }
 

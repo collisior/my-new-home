@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+	
+<title>Rooms</title>
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
+				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
+				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
+				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
+				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+
+	<h1>My Rooms </h1>
+	<p>
+			Rooms of <span sec:authentication="principal.username">User</span>
+	</p>
+	<table>
+    <thead>
+        <tr>
+            <th> Name </th>
+			<th> Details </th>
+        </tr>
+    </thead>
+    <tbody>
+	<tr th:if="${rooms.empty}">
+            <td colspan="2"> No Rooms Available </td>
+        </tr>
+        <tr th:each="room : ${rooms}">
+            <td><span th:text="${room.name}"> Name </span></td>
+			<td><span th:text="${room.details}"> Details </span></td>
+			
+        </tr>
+    </tbody>
+</table>
+
+	<script type="text/javascript"
+		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+	
+	
+	
+</body>
+</html>

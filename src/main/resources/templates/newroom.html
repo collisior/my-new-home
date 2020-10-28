@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+	
+<title>New Room</title>
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
+				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
+				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
+				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
+				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<div th:if="${param.success}">
+					<div class="alert alert-info">You've successfully created new room.
+						</div>
+				</div>
+
+				<h1>Create New Room</h1>
+			  <form th:action="@{/newroom}" th:object="${room}" method="post" method="post" enctype="multipart/form-data">
+
+					<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+						th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
+						error</p>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('name')}? 'has-error':''">
+						<label for="name" class="control-label">Room name</label> <input
+							id="name" class="form-control" th:field="*{name}" />
+						<p class="error-message"
+							th:each="error: ${#fields.errors('name')}"
+							th:text="${error}">Validation error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('details')}? 'has-error':''">
+						<label for="details" class="control-label">Room details</label> <input
+							id="details" class="form-control" th:field="*{details}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('details')}"
+							th:text="${error}">Validation error</p>
+					</div>
+				  
+				  <div class="form-group">
+						<label for="image" class="control-label">Item Image</label> 
+					  <input type="file" id="image" class="form-control" th:field="*{image}" accept="image/png, image/jpeg" />
+				  </div>
+					
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Finish Room</button>
+						<span>Cancel <a href="/" th:href="@{/index}">Cancel
+					  here</a></span>
+					</div>
+				  
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript"
+		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+	
+	
+	
+</body>
+</html>

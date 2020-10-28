@@ -16,9 +16,21 @@ public class MainController {
     public String login(Model model) {
         return "login";
     }
-
-    @GetMapping("/user")
-    public String userIndex() {
-        return "user/index";
+    
+    @GetMapping("/home")
+    public String userHome() {
+        return "home";
     }
+    
+    @GetMapping("/settings")
+    public String userSettings() {
+        return "settings";
+    }
+    
+    @GetMapping("/dashboard")
+    public String userDashboard() {
+        return "dashboard";
+    }
+    
+    
 }
