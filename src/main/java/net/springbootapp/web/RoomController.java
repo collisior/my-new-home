@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import net.springbootapp.facade.IAuthenticationFacade;
 import net.springbootapp.service.RoomService;
-import net.springbootapp.web.dto.ItemDTO;
 import net.springbootapp.web.dto.RoomDTO;
 
 @Controller

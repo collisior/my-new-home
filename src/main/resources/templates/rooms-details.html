@@ -9,29 +9,6 @@
 	
 <title>Rooms</title>
 
-<style>
-div.gallery {
-  margin: 5px;
-  border: 1px solid #ccc;
-  float: left;
-  width: 180px;
-}
-
-div.gallery:hover {
-  border: 1px solid #777;
-}
-
-div.gallery img {
-  width: 100%;
-  height: auto;
-}
-
-div.desc {
-  padding: 15px;
-  text-align: center;
-}
-</style>
-	
 </head>
 
 <body>
@@ -61,42 +38,18 @@ div.desc {
 	<br>
 	<br>
 
-	<h1>My Rooms </h1>
+	<h1> Room Details: </h1>
 	<p>
 			Rooms of <span sec:authentication="principal.username">User</span>
 	</p>
-	<table>
-    <thead>
-        <tr>
-            <th> Rooms: </th>
-<!--
-			<th> Image </th>
-			<th> Details </th>
--->
-        </tr>
-    </thead>
-    <tbody>
-	<tr th:if="${rooms.empty}">
-            <td> No Rooms Available </td>
-        </tr>
-        <tr th:each="room : ${rooms}">
-<!--			<td><span th:text="${room.name}"> Name </span></td>-->
-<!--			<td><img src="room.image" alt="" border="3" height="100" width="100" /> Image </span></td>-->
-<!--			<td><span th:text="${room.details}"> Details </span></td>-->
-			<td>
-				<a href="#" th:href="@{/rooms/{id}(id = ${room.id})}">
-<!-- 				<a href="#" th:href="@{/rooms-details}">View</a><br/> -->
-					<div class="gallery">
-						<div class="desc"><span th:text="${room.name}"> Room Name </span></div>
-							<img src="img_lights.jpg" alt="Northern Lights" width="150" height="150">
-						<div class="desc"><span th:text="${room.details}"> Details </span></div>
-					</div>
-				</a>
-			</td>
-        </tr>
-    </tbody>
-</table>
-	
+	<p>
+		<div>
+	        <h3 class="mb-3">Name : <span th:text="${name}"></span></h3>
+			<h3 class="mb-3">Details : <span th:text="${details}"></span></h3>
+			<img class='img-thumbnail' th:src="'data:image/jpeg;base64,'+${image}" alt="">
+	    </div>
+    </p>
+    
 	<script type="text/javascript"
 		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
 	<script type="text/javascript"

@@ -4,6 +4,8 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import net.springbootapp.model.Room;
+
 public class ItemDTO {
 
 	@NotEmpty
@@ -11,6 +13,7 @@ public class ItemDTO {
 	private String details;
 	private String link;
 	private int price;
+	private Room roomSelected;
 	private MultipartFile image;
 
 	public String getName() {
@@ -51,5 +54,13 @@ public class ItemDTO {
 
 	public void setImage(MultipartFile image) {
 		this.image = image;
+	}
+
+	public Room getRoomSelected() {
+		return roomSelected;
+	}
+
+	public void setRoomSelected(Room roomSelected) {
+		this.roomSelected = roomSelected;
 	}
 }

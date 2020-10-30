@@ -43,9 +43,9 @@ public class ItemServiceImplementation implements ItemService {
 	public Item save(ItemDTO registration) {
 		Item item = new Item();
 		User user = userService.findByEmail(currentUserEmail());
-		Room defaultRoom = new Room();
+//		Room defaultRoom = new Room();
 		for(Room r: user.getRooms()) {
-			defaultRoom = r;
+//			defaultRoom = r;
 			for(Item i: r.getItems()) {
 				System.out.println("In " + r + " item = " + i);
 			}	
@@ -56,8 +56,9 @@ public class ItemServiceImplementation implements ItemService {
         item.setDetails(registration.getDetails());
         item.setLink(registration.getLink());
         item.setPrice(registration.getPrice());
-        item.setRoom(defaultRoom);
-        item.setRoomId(defaultRoom.getId());
+        
+        item.setRoom(registration.getRoomSelected());
+        item.setRoomId(registration.getRoomSelected().getId());
         try {
 			saveItemImage(item, registration.getImage());
 			System.out.println("Item's image saved.");

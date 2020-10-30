@@ -31,7 +31,7 @@ public class Room {
     private byte[] image;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private User user;
     
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER,

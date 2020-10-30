@@ -27,10 +27,4 @@ public class MainController {
         return "settings";
     }
     
-    @GetMapping("/dashboard")
-    public String userDashboard() {
-        return "dashboard";
-    }
-    
-    
 }

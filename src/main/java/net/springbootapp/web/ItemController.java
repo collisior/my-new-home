@@ -43,23 +43,20 @@ public class ItemController {
 
 	@GetMapping
 	public String showNewItemForm(Model model) {
-//		List<Room> roomsList = userService.findAllRooms();
-//		model.addAttribute("roomsList", roomsList);
+		List<Room> roomsList = userService.findAllRooms();
+		model.addAttribute("roomsList", roomsList);
 //		Long roomId = 0L;
 //		model.addAttribute("roomSelected", roomId);
 		return "newitem";
 	}
 
 	@PostMapping
-	public String createNewItem( @ModelAttribute("item") @Valid ItemDTO itemDTO,  @RequestParam("image") MultipartFile file, BindingResult result) {
+	public String createNewItem( @ModelAttribute("item") @Valid ItemDTO itemDTO, @RequestParam(value = "roomSelected", required = false) Room room, @RequestParam("image") MultipartFile file, BindingResult result) {
 		
 		if (result.hasErrors()) {
 			System.out.println("ERROR");
 			return "newitem";
 		}
-		
-//		itemDTO.setRoomId(roomId);
-//		System.out.println("roomId = "+ roomId);
 		
 		try {
 			itemService.save(itemDTO);
