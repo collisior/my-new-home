@@ -7,7 +7,8 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
 	
-<title>Settings</title>
+<title>Rooms</title>
+
 </head>
 
 <body>
@@ -37,14 +38,48 @@
 	<br>
 	<br>
 
-	<h1>My Settings</h1>
-
+	<h1> Room Details: </h1>
+	<p>
+			Rooms of <span sec:authentication="principal.username">User</span>
+	</p>
+	<p>
+		<div>
+	        <h3 class="mb-3">Name : <span th:text="${name}"></span></h3>
+			<h5 class="mb-3">Details : <span th:text="${details}"></span></h5>
+			<img class="img-thumbnail" th:src="'data:image/png,image/jpeg;base64,'+${image}" alt="">
+			
+			<tbody>
+			<tr th:if="${items.empty}">
+				<td colspan="2"> No Items Available </td>
+			</tr>
+			<tr th:each="item : ${items}">
+				<div>
+					<td><span th:text="${item.name}"> Name </span></td>
+					<td><span th:text="${item.price}"> Price </span></td>
+					<td>
+						<a th:href="@{/rooms/deleteItem/{id}(id = ${item.id})}" class="btn btn-danger" > Delete</a>
+					</td>
+					<td>
+						<a th:href="@{/rooms/editItem/{id}(id = ${item.id})}" class="btn btn-primary" > Edit</a>
+					</td>
+				</div>
+				<br>
+			</tr>
+    </tbody>
+			
+	    </div>
+    </p>
+    
 	<script type="text/javascript"
 		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
 	<script type="text/javascript"
 		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 	
-	
-	
 </body>
+
+<script type="text/javascript">
+		$('.btn-danger').on('click', function () {
+        	return confirm("Are you sure? This item will be deleted forever.");
+    	});
+	</script>
 </html>

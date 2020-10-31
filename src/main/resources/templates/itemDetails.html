@@ -25,9 +25,9 @@
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
 				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
-				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/newRoom}">New Room</a>
 				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
-				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/newItem}">New Item</a>
 				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
 				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
 				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
@@ -38,16 +38,22 @@
 	<br>
 	<br>
 
-	<h1> Room Details: </h1>
+	<h1> Item Details: </h1>
 	<p>
-			Rooms of <span sec:authentication="principal.username">User</span>
+			Item of <span sec:authentication="principal.username">User</span>
 	</p>
 	<p>
 		<div>
 	        <h3 class="mb-3">Name : <span th:text="${name}"></span></h3>
 			<h3 class="mb-3">Details : <span th:text="${details}"></span></h3>
-			<img class='img-thumbnail' th:src="'data:image/jpeg;base64,'+${image}" alt="">
+			<h3 class="mb-3">Price : <span th:text="${price}"></span></h3>
+			<h3 class="mb-3">Link : <span th:text="${link}"></span></h3>
+			<h3 class="mb-3">Image : <span></span><img class="img-thumbnail" th:src="'data:image/png,image/jpeg;base64,'+${image}" alt="" height="150" width="150"></h3>
+<!--			<img class='img-thumbnail' th:src="'data:image/png,image/jpeg;base64,'+${image}" alt="">-->
 	    </div>
+	<div>
+		
+	</div>
     </p>
     
 	<script type="text/javascript"

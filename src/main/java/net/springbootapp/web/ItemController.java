@@ -1,12 +1,10 @@
 package net.springbootapp.web;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +22,7 @@ import net.springbootapp.service.UserService;
 import net.springbootapp.web.dto.ItemDTO;
 
 @Controller
-@RequestMapping("/newitem")
+@RequestMapping("/newItem")
 public class ItemController {
 
 	@Autowired
@@ -45,25 +43,25 @@ public class ItemController {
 	public String showNewItemForm(Model model) {
 		List<Room> roomsList = userService.findAllRooms();
 		model.addAttribute("roomsList", roomsList);
-//		Long roomId = 0L;
-//		model.addAttribute("roomSelected", roomId);
-		return "newitem";
+		List<String> statusList = Status.getStatusList();
+		model.addAttribute("statusList", statusList);
+		System.out.println("returning NEWITEM link");
+		return "newItem";
 	}
 
 	@PostMapping
-	public String createNewItem( @ModelAttribute("item") @Valid ItemDTO itemDTO, @RequestParam(value = "roomSelected", required = false) Room room, @RequestParam("image") MultipartFile file, BindingResult result) {
-		
+	public String createNewItem( @ModelAttribute("item") @Valid ItemDTO itemDTO, 
+			@RequestParam(value = "roomSelected", required = false) Room room, 
+			@RequestParam(value = "statusSelected", required = false) String status, 
+			@RequestParam("image") MultipartFile file, BindingResult result) {
 		if (result.hasErrors()) {
-			System.out.println("ERROR");
-			return "newitem";
+			return "newItem";
 		}
-		
 		try {
 			itemService.save(itemDTO);
 		} catch ( Exception e ){
 			System.out.println("message = "+ e.getMessage());
 		}
-		
-		return "redirect:/newitem?success";
+		return "redirect:/newItem?success";
 	}
 }

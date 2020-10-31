@@ -2,6 +2,7 @@ package net.springbootapp.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,16 +52,16 @@ public class RoomServiceImplementation implements RoomService {
 		room.setUserId(user.getId());
 		try {
 			saveRoomImage(room, registration.getImage());
-			System.out.println("Item's image saved.");
+			System.out.println("Room image saved.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Item's image couldn't saved.");
+			System.out.println("Room's image couldn't saved.");
 			e.printStackTrace();
 		}
 		
 		return roomRepository.save(room);
 	}
-
+	
 	public String delete(Room room) {
 		roomRepository.delete(room);
 		return "Successfully deleted the room";
@@ -74,7 +75,6 @@ public class RoomServiceImplementation implements RoomService {
     @ResponseBody
     public String currentUserEmail() {
         Authentication authentication = authenticationFacade.getAuthentication();
-    	System.out.print(">>>>>>" + authentication.getName());
         return authentication.getName();
     }
     

@@ -20,22 +20,8 @@ public class DashboardController {
 
 	@GetMapping
 	public String showAll(Model model) {
-		model.addAttribute("rooms", roomService.findAll());
-		return "rooms";
+//		model.addAttribute("dashboard", roomService.findAll());
+		return "dashboard";
 	}
-	
-
-//	@GetMapping("/images/items/{id}")
-//	public void showProductImage(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
-//		response.setContentType("image/jpg"); // Or whatever format you wanna use
-//		System.out.println("PAthVariable id: " + id);
-//
-//		Optional<Item> itemOptional = itemService.findById(id);
-//		if (itemOptional.isPresent()) {
-//			InputStream is = new ByteArrayInputStream(itemOptional.get().getImage());
-//			IOUtils.copy(is, response.getOutputStream());
-//		}
-//		
-//	}
 
 }

@@ -25,9 +25,9 @@
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
 				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
-				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/newRoom}">New Room</a>
 				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
-				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/newItem}">New Item</a>
 				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
 				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
 				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
@@ -48,7 +48,7 @@
 				</div>
 
 				<h1>Create New Room</h1>
-			  <form th:action="@{/newroom}" th:object="${room}" method="post" method="post" enctype="multipart/form-data">
+			  <form th:action="@{/newRoom}" th:object="${room}" method="post" enctype="multipart/form-data">
 
 					<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
 						th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
@@ -78,7 +78,7 @@
 					
 					<div class="form-group">
 						<button type="submit" class="btn btn-success">Finish Room</button>
-						<span>Cancel <a href="/" th:href="@{/index}">Cancel
+						<span>Cancel <a href="/" th:href="@{/}">Cancel
 					  here</a></span>
 					</div>
 				  

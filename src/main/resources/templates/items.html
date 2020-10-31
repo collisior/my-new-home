@@ -24,9 +24,9 @@
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
 				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
-				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/newRoom}">New Room</a>
 				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
-				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/newItem}">New Item</a>
 				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
 				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
 				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
@@ -58,19 +58,32 @@
             <td><span th:text="${item.name}"> Name </span></td>
             <td><span th:text="${item.price}"> Price </span></td>
 			<td><span th:text="${item.details}"> Details </span></td>
-<!--
-			<td><img th:src="|data:image/png;base64,${item.image}|"/></td>
-			<td><img th:src="|data:image/jpg;base64,${item.image}|"/></td>
-			<td><img th:src="|data:image/jpeg;base64,${item.image}|"/></td>
--->
-			<td><img src="data:image/png;base64, ${item.image}"></td>
-			<td><img src="data:image/jpg;base64, ${item.image}"></td>
-			<td><img src="data:image/jpeg;base64, ${item.image}"></td>
+<!--			<td><img class="img-thumbnail" th:src="'data:image/jpeg;base64,'+${image}" alt=""></td>-->
 <!--			<td><img th:src="@{'item/image/' + @{item.image}}"></td>-->
+<!--			<td><img class="img-thumbnail" th:src="'data:image/png,image/jpeg;base64,' + ${ImageHandler.getImgData(item.image)}" /></td>-->
 			
         </tr>
     </tbody>
 </table>
+<!--
+	
+<tbody>
+	<tr th:if="${items.empty}">
+            <td> No Rooms Available </td>
+        </tr>
+        <tr th:each="item : ${items}">
+			<td>
+				<a href="#" th:href="@{/items/{id}(id = ${item.id})}">
+					<div class="gallery">
+						<div class="desc"><span th:text="${item.name}"> Item Name </span></div>
+						
+						<div class="desc"><span th:text="${item.details}"> Details </span></div>
+					</div>
+				</a>
+			</td>
+        </tr>
+    </tbody>
+-->
 	
 	<script type="text/javascript"
 		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>

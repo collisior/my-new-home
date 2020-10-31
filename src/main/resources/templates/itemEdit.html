@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+	
+<title>Edit Item</title>
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
+				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
+				<a class="navbar-brand" href="#" th:href="@{/newRoom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
+				<a class="navbar-brand" href="#" th:href="@{/newItem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
+				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
+				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<br>
+    <form th:action="@{/rooms/saveEditItem}" th:object="${itemObject}" method="post">
+<!--	<form th:action="@{/saveItem}" th:object="${itemObject}" method="post">-->
+		<div class="form-row">
+			<div class="col-md-6 form-group">
+				<label>Project ID</label>
+				<input type="number" class="form-control" th:field="*{id}">
+			</div>
+			<div class="col-md-6 form-group">
+				<label>Name </label>
+				<input type="text" class="form-control" th:field="*{name}" th:placeholder="itemObject.name">
+			</div>
+			<div class="col-md-6 form-group">
+				<label>Price </label>
+				<input type="number" class="form-control" th:field="*{price}" th:placeholder="itemObject.price">
+			</div>
+			<div class="col-md-6 form-group">
+				<label>Link </label>
+				<input type="text" class="form-control" th:field="*{link}" th:placeholder="itemObject.link">
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary btn-block mt-3">Save Project</button>
+	</form>
+
+	
+<!--
+	
+<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+
+				<div th:if="${param.success}">
+					<div class="alert alert-info">Item was updated.
+						</div>
+				</div>
+
+				<h1>Edit Item </h1>
+			  <div>
+				<form th:action="@{/itemEdit}" th:object="${itemObject}" method="post">
+					<br>
+					<br>
+					<label >Item name: </label>
+					<input type="text" name="name" th:value="${itemObject.name}" th:placeholder="${oldName}"><br>
+					<h3><span th:text="${itemObject.name}"></span></h3>
+					<h3><span th:text="${itemObject.price}"></span></h3>
+					<label >Item price :</label>
+					<input type="text" name="price" th:placeholder="${oldPrice}"><br>
+					<label >Item link:</label>
+					<input type="text" name="link"  th:placeholder="${oldLink}"><br>
+					<button type="submit">Update</button>
+				</form>
+			  </div>
+			</div>
+		</div>
+	</div>
+	
+-->
+</body>
+</html>

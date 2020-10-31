@@ -24,9 +24,9 @@
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
 				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
-				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/newRoom}">New Room</a>
 				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
-				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/newItem}">New Item</a>
 				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
 				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
 				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
@@ -47,7 +47,7 @@
 				</div>
 
 				<h1>Create New Item </h1>
-			  <form th:action="@{/newitem}" th:object="${item}" method="post" enctype="multipart/form-data">
+			  <form th:action="@{/newItem}" th:object="${item}" method="post" enctype="multipart/form-data">
 
 					<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
 						th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
@@ -88,27 +88,19 @@
 							th:each="error : ${#fields.errors('price')}"
 							th:text="${error}">Validation error</p>
 				  </div>
-				  <!-- <div class="form-group">
-						<select th:field="*{roomSelected}">
-							<option th:each="room : ${#roomsList}" th:value="${room}" th:text="${room.name}">
-							</option>
-						</select>
-				  </div> -->
 				  
-<!--
-				  <div class="form-group"
-						th:classappend="${#fields.hasErrors('price')}? 'has-error':''">
-						<label for="room_id" class="control-label">Item Room id</label> 
-					  <input id="room_id" class="form-control" th:field="*{room_id}" />
-						<p class="error-message"
-							th:each="error : ${#fields.errors('room_id')}"
-							th:text="${error}">Validation error</p>
-				  </div>
--->
 				  <div class="form-group">
 					  <label class="control-label">Item Room</label> 
 					  <select id ="roomSelected" class="form-control" th:field="*{roomSelected}">
 							<option th:each="room : ${roomsList}" th:value="${room.id}" th:text="${room.name}">Select Room
+							</option>
+						</select>
+				  </div>
+				  
+				  <div class="form-group">
+					  <label class="control-label">Item Status </label> 
+					  <select id ="statusSelected" class="form-control" th:field="*{statusSelected}">
+							<option th:each="status : ${statusList}" th:value="${status}" th:text="${status}">Select Status
 							</option>
 						</select>
 				  </div>
@@ -122,7 +114,7 @@
 				  <br>
 				  <div class="form-group">
 					  <button type="submit" class="btn btn-success">Add Item</button>
-					  <span> <a href="/" th:href="@{/index}">Cancel here</a></span>
+					  <span> <a href="/" th:href="@{/}">Cancel here</a></span>
 				  </div>
 				  
 				</form>

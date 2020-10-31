@@ -2,10 +2,13 @@ package net.springbootapp.model;
 
 import javax.persistence.*;
 
+import net.springbootapp.ImageHandler;
+import net.springbootapp.web.dto.ItemDTO;
+
 
 @Entity
 @Table(name = "item")
-public class Item {
+public class Item implements Comparable<Item>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,7 +16,7 @@ public class Item {
     private String name;
     private String details;
     private String link;
-    private int price;
+    private double price;
     private String status;
     private Long user_id;
     private Long room_id;
@@ -21,8 +24,7 @@ public class Item {
     @Lob
     private byte[] image;
     
-    private String status_id;
-    
+        
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private User user;
@@ -67,11 +69,11 @@ public class Item {
 		this.link = link;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -89,14 +91,6 @@ public class Item {
 
 	public void setUserId(Long user_id) {
 		this.user_id = user_id;
-	}
-
-	public String getStatusId() {
-		return status_id;
-	}
-
-	public void setStatusId(String status_id) {
-		this.status_id = status_id;
 	}
 	
 	public Room getRoom() {
@@ -120,6 +114,8 @@ public class Item {
         return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", room id='" + room_id + '\'' +
+                ", price='" + price + '\'' +
                 '}';
     }
 
@@ -137,6 +133,11 @@ public class Item {
 
 	public void setRoomId(Long room_id) {
 		this.room_id = room_id;
+	}
+	
+	@Override
+	public int compareTo(Item otherItem) {
+		return Integer.compare(getId().intValue(), otherItem.getId().intValue());
 	}
 
 }

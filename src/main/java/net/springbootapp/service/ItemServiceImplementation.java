@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.springbootapp.ImageHandler;
 import net.springbootapp.facade.IAuthenticationFacade;
 import net.springbootapp.model.Item;
 import net.springbootapp.model.Room;
@@ -40,6 +41,15 @@ public class ItemServiceImplementation implements ItemService {
     	this.itemRepository = itemRepository;
     }
 
+	public void saveEdit(Item originalItem, Item editedItem) {
+		
+		originalItem.setName(editedItem.getName());
+		originalItem.setPrice(editedItem.getPrice());
+		originalItem.setLink(editedItem.getLink());
+		
+		itemRepository.save(originalItem);
+	}
+	
 	public Item save(ItemDTO registration) {
 		Item item = new Item();
 		User user = userService.findByEmail(currentUserEmail());
@@ -56,11 +66,11 @@ public class ItemServiceImplementation implements ItemService {
         item.setDetails(registration.getDetails());
         item.setLink(registration.getLink());
         item.setPrice(registration.getPrice());
-        
+        item.setStatus(registration.getStatusSelected());
         item.setRoom(registration.getRoomSelected());
         item.setRoomId(registration.getRoomSelected().getId());
         try {
-			saveItemImage(item, registration.getImage());
+			ImageHandler.saveItemImage(item, registration.getImage());
 			System.out.println("Item's image saved.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -86,10 +96,6 @@ public class ItemServiceImplementation implements ItemService {
         Authentication authentication = authenticationFacade.getAuthentication();
         return authentication.getName();
     }
-    
-    public void saveItemImage(Item item, MultipartFile file) throws IOException {
-		item.setImage(file.getBytes());
-	}
 
 	@Override
 	public List<Item> findAll() {

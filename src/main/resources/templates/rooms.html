@@ -68,11 +68,7 @@ div.desc {
 	<table>
     <thead>
         <tr>
-            <th> Rooms: </th>
-<!--
-			<th> Image </th>
-			<th> Details </th>
--->
+            <th> Rooms: </th>\
         </tr>
     </thead>
     <tbody>
@@ -85,13 +81,16 @@ div.desc {
 <!--			<td><span th:text="${room.details}"> Details </span></td>-->
 			<td>
 				<a href="#" th:href="@{/rooms/{id}(id = ${room.id})}">
-<!-- 				<a href="#" th:href="@{/rooms-details}">View</a><br/> -->
 					<div class="gallery">
 						<div class="desc"><span th:text="${room.name}"> Room Name </span></div>
-							<img src="img_lights.jpg" alt="Northern Lights" width="150" height="150">
+<!--						<img class="img-thumbnail" th:src="'data:image/jpeg,image/png;base64,' + ${ImageHandler.getImgData(room.getImage())}" "alt=" " width="150" height="150">-->
+						
 						<div class="desc"><span th:text="${room.details}"> Details </span></div>
 					</div>
 				</a>
+			</td>
+			<td>
+				<a th:href="@{/rooms/deleteRoom/{id}(id = ${room.id})}" class="btn btn-danger" > Delete Room</a>
 			</td>
         </tr>
     </tbody>
@@ -102,7 +101,10 @@ div.desc {
 	<script type="text/javascript"
 		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
 	
-	
-	
 </body>
+	<script type="text/javascript">
+		$('.btn-danger').on('click', function () {
+        	return confirm("Are you sure? All items in this room will be deleted.");
+    	});
+	</script>
 </html>

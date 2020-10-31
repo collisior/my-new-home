@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "room")
-public class Room {
+public class Room  implements Comparable<Room>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -84,6 +84,11 @@ public class Room {
 	public void setUserId(Long user_id) {
 		this.user_id = user_id;
 	}
+	
+	public void setItems(Set<Item> items) {
+		this.items = items;
+	}
+	
 	public Set<Item> getItems() {
 		return items;
 	}
@@ -103,4 +108,9 @@ public class Room {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+	@Override
+	public int compareTo(Room otherRoom) {
+		return Integer.compare(getId().intValue(), otherRoom.getId().intValue());
+	}
 }

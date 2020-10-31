@@ -12,9 +12,10 @@ public class ItemDTO {
 	private String name;
 	private String details;
 	private String link;
-	private int price;
+	private double price;
 	private Room roomSelected;
 	private MultipartFile image;
+	private String statusSelected;
 
 	public String getName() {
 		return name;
@@ -31,6 +32,14 @@ public class ItemDTO {
 	public void setDetails(String details) {
 		this.details = details;
 	}
+	
+	public String getStatusSelected() {
+		return statusSelected;
+	}
+
+	public void setStatusSelected(String statusSelected) {
+		this.statusSelected = statusSelected;
+	}
 
 	public String getLink() {
 		return link;
@@ -40,11 +49,11 @@ public class ItemDTO {
 		this.link = link;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
