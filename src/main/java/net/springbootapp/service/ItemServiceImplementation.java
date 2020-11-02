@@ -79,7 +79,6 @@ public class ItemServiceImplementation implements ItemService {
 			System.out.println("Item's image couldn't saved.");
 			e.printStackTrace();
 		}
-        persist();
         return itemRepository.save(item);
 	}
 
