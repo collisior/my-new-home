@@ -46,11 +46,13 @@ public class ItemServiceImplementation implements ItemService {
 		originalItem.setName(editedItem.getName());
 		originalItem.setPrice(editedItem.getPrice());
 		originalItem.setLink(editedItem.getLink());
+		originalItem.setStatus(editedItem.getStatus());
 		
 		itemRepository.save(originalItem);
 	}
 	
 	public Item save(ItemDTO registration) {
+		ImageHandler imageHandler = new ImageHandler();
 		Item item = new Item();
 		User user = userService.findByEmail(currentUserEmail());
 //		Room defaultRoom = new Room();
@@ -70,13 +72,14 @@ public class ItemServiceImplementation implements ItemService {
         item.setRoom(registration.getRoomSelected());
         item.setRoomId(registration.getRoomSelected().getId());
         try {
-			ImageHandler.saveItemImage(item, registration.getImage());
+        	imageHandler.saveItemImage(item, registration.getImage());
 			System.out.println("Item's image saved.");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Item's image couldn't saved.");
 			e.printStackTrace();
 		}
+        persist();
         return itemRepository.save(item);
 	}
 

@@ -14,7 +14,7 @@ div.gallery {
   margin: 5px;
   border: 1px solid #ccc;
   float: left;
-  width: 180px;
+  width: 280px;
 }
 
 div.gallery:hover {
@@ -48,9 +48,9 @@ div.desc {
 				</button>
 				<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
 				<a class="navbar-brand" href="#" th:href="@{/rooms}">Rooms</a>
-				<a class="navbar-brand" href="#" th:href="@{/newroom}">New Room</a>
+				<a class="navbar-brand" href="#" th:href="@{/newRoom}">New Room</a>
 				<a class="navbar-brand" href="#" th:href="@{/items}">Items</a>
-				<a class="navbar-brand" href="#" th:href="@{/newitem}">New Item</a>
+				<a class="navbar-brand" href="#" th:href="@{/newItem}">New Item</a>
 				<a class="navbar-brand" href="#" th:href="@{/dashboard}">Dashboard</a>
 				<a class="navbar-brand" href="#" th:href="@{/settings}">Settings</a>
 				<a class="navbar-brand" href="#" th:href="@{/logout}">Logout</a>
@@ -68,7 +68,7 @@ div.desc {
 	<table>
     <thead>
         <tr>
-            <th> Rooms: </th>\
+            <th> Rooms: </th>
         </tr>
     </thead>
     <tbody>
@@ -76,21 +76,22 @@ div.desc {
             <td> No Rooms Available </td>
         </tr>
         <tr th:each="room : ${rooms}">
-<!--			<td><span th:text="${room.name}"> Name </span></td>-->
-<!--			<td><img src="room.image" alt="" border="3" height="100" width="100" /> Image </span></td>-->
-<!--			<td><span th:text="${room.details}"> Details </span></td>-->
 			<td>
 				<a href="#" th:href="@{/rooms/{id}(id = ${room.id})}">
 					<div class="gallery">
 						<div class="desc"><span th:text="${room.name}"> Room Name </span></div>
-<!--						<img class="img-thumbnail" th:src="'data:image/jpeg,image/png;base64,' + ${ImageHandler.getImgData(room.getImage())}" "alt=" " width="150" height="150">-->
-						
+<!--						<img th:src="${room.image} == null ? @{'data:image/png,image/jpeg;base64,'+${imageDefault}} : @{'data:image/png,image/jpeg;base64,'+${imageHandler.getImageOfRoom(room)}}" alt="" class="img-thumbnail"  height="250" width="250">-->
+						<img th:src="${room.image} == null ? @{'data:image/jpeg;base64,'+${imageDefault}} : @{'data:image/jpeg;base64,'+${imageHandler.getImageOfRoom(room)}}" width="280">
 						<div class="desc"><span th:text="${room.details}"> Details </span></div>
+						
 					</div>
 				</a>
 			</td>
 			<td>
-				<a th:href="@{/rooms/deleteRoom/{id}(id = ${room.id})}" class="btn btn-danger" > Delete Room</a>
+				<a th:href="@{/rooms/{id}(id = ${room.id})}" class="btn btn-warning" > View Room </a>
+			</td>
+			<td>
+				<a th:href="@{/rooms/deleteRoom/{id}(id = ${room.id})}" class="btn btn-danger" > Delete Room </a>
 			</td>
         </tr>
     </tbody>
@@ -104,7 +105,7 @@ div.desc {
 </body>
 	<script type="text/javascript">
 		$('.btn-danger').on('click', function () {
-        	return confirm("Are you sure? All items in this room will be deleted.");
+        	return confirm("Are you sure? All items in this room will be deleted forever.");
     	});
 	</script>
 </html>

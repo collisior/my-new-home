@@ -19,6 +19,7 @@ public class UserRegistrationDTO {
 
 	@NotEmpty
 	private String confirmPassword;
+	
 
 	@Email
 	@NotEmpty

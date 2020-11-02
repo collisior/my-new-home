@@ -37,8 +37,7 @@
 	<br>
 	<br>
 	<br>
-    <form th:action="@{/rooms/saveEditItem}" th:object="${itemObject}" method="post">
-<!--	<form th:action="@{/saveItem}" th:object="${itemObject}" method="post">-->
+    <form th:action="@{/items/saveEditItem}" th:object="${itemObject}" method="post">
 		<div class="form-row">
 			<div class="col-md-6 form-group">
 				<label>Project ID</label>
@@ -56,8 +55,15 @@
 				<label>Link </label>
 				<input type="text" class="form-control" th:field="*{link}" th:placeholder="itemObject.link">
 			</div>
+			
+			<div class="col-md-6 form-group">
+				<label> Status </label> 
+				<select id ="statusSelected" class="form-control" th:field="*{status}">
+					<option th:each="statusX : ${statusList}" th:value="${statusX}" th:text="${statusX}"> Select Status </option>
+				</select>
+			</div>
 		</div>
-		<button type="submit" class="btn btn-primary btn-block mt-3">Save Project</button>
+		<button type="submit" class="btn btn-primary btn-block mt-3">Save </button>
 	</form>
 
 	

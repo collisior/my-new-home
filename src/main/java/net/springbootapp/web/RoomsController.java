@@ -33,32 +33,31 @@ public class RoomsController {
 	@GetMapping
 	public String showAll(Model model) {
 		model.addAttribute("rooms", roomService.findAll());
-		model.addAttribute("ImageHandler", new ImageHandler());
+		ImageHandler imageHandler = new ImageHandler();
+		Optional<Room> defaultRoom = roomService.findById(0L);
+		model.addAttribute("imageHandler",imageHandler);
+		model.addAttribute("imageDefault", imageHandler.getImgData(defaultRoom.get().getImage()));
 		return "rooms";
 	}
 
 	@GetMapping("/{id}")
-	public ModelAndView getRoomDetails(@PathVariable("id") long id) {
+	public ModelAndView getRoomDetails(@PathVariable("id") long id, Model model) {
+		ImageHandler imageHandler = new ImageHandler();
 		Optional<Room> room = roomService.findById(id);
 		Optional<Room> defaultRoom = roomService.findById(0L);
-		System.out.println("ROOM IMAGE 0: " + room.get().getImage());
-		System.out.println("ROOM IMAGE 0: " + defaultRoom.get().getImage());
-
 		ModelAndView modelAndView = new ModelAndView("roomDetails");
+		modelAndView.addObject("imageHandler", new ImageHandler());
+		modelAndView.addObject("imageDefault", imageHandler.getImgData(defaultRoom.get().getImage()));
+		modelAndView.addObject("room", room.get());
+
 		modelAndView.addObject("name", room.get().getName());
 		if (room.get().getDetails() == null) {
-			modelAndView.addObject("details", "No details found.");
+			modelAndView.addObject("details", "No details provided.");
 		} else {
 			modelAndView.addObject("details", room.get().getDetails());
 		}
-		if (room.get().getImage() == null) {
-			modelAndView.addObject("image", ImageHandler.getImgData(defaultRoom.get().getImage()));
-		} else {
-			modelAndView.addObject("image", ImageHandler.getImgData(room.get().getImage()));
-		}
-
 		modelAndView.addObject("items", room.get().getItems());
-
+		model.addAttribute("room", room.get());
 		return modelAndView;
 	}
 
@@ -76,23 +75,10 @@ public class RoomsController {
 
 	@GetMapping("/deleteItem/{id}")
 	public String deleteItem(@PathVariable("id") long id) {
-		System.out.println("Item DELETING " + id);
 		Optional<Item> item = itemService.findById(id);
 		itemService.delete(item.get());
 		return "redirect:/rooms/" + item.get().getRoomId();
 	}
-
-//    @GetMapping("/editItem/{id}")
-//	public ModelAndView editItem(@PathVariable("id") long id) {
-//    	Optional<Item> item = itemService.findById(id);
-//		ModelAndView modelAndView = new ModelAndView("itemEdit");
-//		modelAndView.addObject("itemObject", item.get());
-//		modelAndView.addObject("oldName", item.get().getName());
-//		modelAndView.addObject("oldPrice", item.get().getPrice());
-//		modelAndView.addObject("oldLink", item.get().getLink());
-//		System.out.println("Item getModel " + modelAndView.getModel());
-//		return modelAndView;
-//	}
 
 	@PostMapping("/saveItem")
 	public String saveItem(@ModelAttribute Item itemObject) {
@@ -101,16 +87,6 @@ public class RoomsController {
 		System.out.println("Item itemitem " + itemObject.getId());
 		return "rooms";
 	}
-
-//	@GetMapping("/editItem/{id}")
-//	public ModelAndView editItemPage(@PathVariable("id") long id, Model model) {
-//		ModelAndView modelAndView = new ModelAndView("itemEdit");
-//		Optional<Item> item = itemService.findById(id);
-//		modelAndView.addObject("itemObject", item.get());
-//		System.out.println("Item getModel " + modelAndView.getModel());
-//		model.addAttribute("itemObject", item.get());
-//		return modelAndView;
-//	}
 
 	@GetMapping("/editItem/{id}")
 	public String editItemPage(@PathVariable("id") long id, Model model) {

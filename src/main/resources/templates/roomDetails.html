@@ -46,28 +46,55 @@
 		<div>
 	        <h3 class="mb-3">Name : <span th:text="${name}"></span></h3>
 			<h5 class="mb-3">Details : <span th:text="${details}"></span></h5>
-			<img class="img-thumbnail" th:src="'data:image/png,image/jpeg;base64,'+${image}" alt="">
-			
-			<tbody>
-			<tr th:if="${items.empty}">
-				<td colspan="2"> No Items Available </td>
-			</tr>
-			<tr th:each="item : ${items}">
-				<div>
-					<td><span th:text="${item.name}"> Name </span></td>
-					<td><span th:text="${item.price}"> Price </span></td>
-					<td>
-						<a th:href="@{/rooms/deleteItem/{id}(id = ${item.id})}" class="btn btn-danger" > Delete</a>
-					</td>
-					<td>
-						<a th:href="@{/rooms/editItem/{id}(id = ${item.id})}" class="btn btn-primary" > Edit</a>
-					</td>
-				</div>
-				<br>
-			</tr>
-    </tbody>
-			
+			<img th:src="${room.image} == null ? @{'data:image/png;base64,'+${imageDefault}} : @{'data:image/png;base64,'+${imageHandler.getImageOfRoom(room)}}" class="img-thumbnail"  height="250" width="250">
 	    </div>
+	<table>
+    <thead>
+        <tr align="center">
+			<th width="90" align="center"> Image </th>
+            <th width="120" align="center"> Name </th>
+            <th width="90" align="center" > Price </th>
+			<th width="90" align="center" > Status </th>
+        </tr>
+    </thead>
+    <tbody>
+	<tr th:if="${items.empty}">
+		<td> You have no Items added yet </td>
+	</tr>
+    <tr th:each="item : ${items}">
+						<td>
+							<div class="desc5">
+								<img th:src="${item.image} == null ? @{'data:image/jpeg;base64,'+${imageDefault}} : @{'data:image/jpeg;base64,'+${imageHandler.getImageOfItem(item)}}" width="90">
+							</div>
+						</td>
+						<td>
+							<div class="desc5">
+								<span th:text="${item.name}" > Name </span>
+							</div>
+						</td>
+						<td>
+							<div class="desc5">
+								<span th:text="${item.price}" > Price </span>
+							</div>
+						</td>
+						<td>
+							<div class="desc5">
+								<span th:text="${item.status}" > Status</span>
+							</div>
+						</td>
+		<td>
+			<a th:href="@{/items/{id}(id = ${item.id})}" class="btn btn-primary" > View </a>
+		</td>
+		<td>
+			<a th:href="@{/items/editItem/{id}(id = ${item.id})}" class="btn btn-warning" > Edit </a>
+		</td>
+		<td>
+			<a th:href="@{/items/deleteItem/{id}(id = ${item.id})}" class="btn btn-danger" > Delete </a>
+		</td>
+		
+     </tr>
+  </tbody>
+</table>
     </p>
     
 	<script type="text/javascript"

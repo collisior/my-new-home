@@ -8,6 +8,37 @@
 	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
 	
 <title>Items</title>
+	
+	
+<style>
+div.gallery {
+	margin: 5px;
+	border: 1px solid #ccc;
+	float: left;
+	align-content: center;
+	height: 80px;
+}
+
+div.gallery:hover {
+	border: 1px solid #777;
+}
+
+div.gallery img {
+	width: 80px;
+}
+
+div.desc {
+	padding: 15px;
+	text-align: left;
+}
+div.desc5 {
+	padding: 5px;
+	text-align: left;
+}
+
+
+</style>
+	
 </head>
 
 <body>
@@ -44,53 +75,60 @@
 	</p>
 	<table>
     <thead>
-        <tr>
-            <th> Name </th>
-            <th> Price </th>
-			<th> Details </th>
+        <tr align="center">
+			<th width="90" align="center"> Image </th>
+            <th width="120" align="center"> Name </th>
+            <th width="90" align="center" > Price </th>
+			<th width="90" align="center" > Status </th>
         </tr>
     </thead>
     <tbody>
 	<tr th:if="${items.empty}">
-            <td colspan="2"> No Items Available </td>
-        </tr>
-        <tr th:each="item : ${items}">
-            <td><span th:text="${item.name}"> Name </span></td>
-            <td><span th:text="${item.price}"> Price </span></td>
-			<td><span th:text="${item.details}"> Details </span></td>
-<!--			<td><img class="img-thumbnail" th:src="'data:image/jpeg;base64,'+${image}" alt=""></td>-->
-<!--			<td><img th:src="@{'item/image/' + @{item.image}}"></td>-->
-<!--			<td><img class="img-thumbnail" th:src="'data:image/png,image/jpeg;base64,' + ${ImageHandler.getImgData(item.image)}" /></td>-->
-			
-        </tr>
-    </tbody>
+		<td> You have no Items added yet </td>
+	</tr>
+    <tr th:each="item : ${items}">
+						<td>
+							<div class="desc5">
+								<img th:src="${item.image} == null ? @{'data:image/jpeg;base64,'+${imageDefault}} : @{'data:image/jpeg;base64,'+${imageHandler.getImageOfItem(item)}}" width="90">
+							</div>
+						</td>
+						<td>
+							<div class="desc5">
+								<span th:text="${item.name}" > Name </span>
+							</div>
+						</td>
+						<td>
+							<div class="desc5">
+								<span th:text="${item.price}" > Price </span>
+							</div>
+						</td>
+						<td>
+							<div class="desc5">
+								<span th:text="${item.status}" > Status</span>
+							</div>
+						</td>
+		<td>
+			<a th:href="@{/items/{id}(id = ${item.id})}" class="btn btn-primary" > View </a>
+		</td>
+		<td>
+			<a th:href="@{/items/editItem/{id}(id = ${item.id})}" class="btn btn-warning" > Edit </a>
+		</td>
+		<td>
+			<a th:href="@{/items/deleteItem/{id}(id = ${item.id})}" class="btn btn-danger" > Delete </a>
+		</td>
+		
+     </tr>
+  </tbody>
 </table>
-<!--
-	
-<tbody>
-	<tr th:if="${items.empty}">
-            <td> No Rooms Available </td>
-        </tr>
-        <tr th:each="item : ${items}">
-			<td>
-				<a href="#" th:href="@{/items/{id}(id = ${item.id})}">
-					<div class="gallery">
-						<div class="desc"><span th:text="${item.name}"> Item Name </span></div>
-						
-						<div class="desc"><span th:text="${item.details}"> Details </span></div>
-					</div>
-				</a>
-			</td>
-        </tr>
-    </tbody>
--->
 	
 	<script type="text/javascript"
 		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
 	<script type="text/javascript"
 		th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
-	
-	
-	
 </body>
+	<script type="text/javascript">
+		$('.btn-danger').on('click', function () {
+        	return confirm("Are you sure? This room will be deleted forever.");
+    	});
+	</script>
 </html>

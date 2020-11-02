@@ -45,7 +45,6 @@ public class ItemController {
 		model.addAttribute("roomsList", roomsList);
 		List<String> statusList = Status.getStatusList();
 		model.addAttribute("statusList", statusList);
-		System.out.println("returning NEWITEM link");
 		return "newItem";
 	}
 
@@ -54,14 +53,19 @@ public class ItemController {
 			@RequestParam(value = "roomSelected", required = false) Room room, 
 			@RequestParam(value = "statusSelected", required = false) String status, 
 			@RequestParam("image") MultipartFile file, BindingResult result) {
+		System.out.println("creating new item");
 		if (result.hasErrors()) {
 			return "newItem";
 		}
 		try {
+			System.out.println("TRY creating new item");
 			itemService.save(itemDTO);
+			System.out.println("Exit TRY creating new item");
 		} catch ( Exception e ){
+			System.out.println("ERROR CATCH creating new item");
 			System.out.println("message = "+ e.getMessage());
 		}
+		
 		return "redirect:/newItem?success";
 	}
 }

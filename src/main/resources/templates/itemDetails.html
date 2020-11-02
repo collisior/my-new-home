@@ -38,18 +38,17 @@
 	<br>
 	<br>
 
-	<h1> Item Details: </h1>
+	<h1> Item 2 Details: </h1>
 	<p>
 			Item of <span sec:authentication="principal.username">User</span>
 	</p>
 	<p>
 		<div>
-	        <h3 class="mb-3">Name : <span th:text="${name}"></span></h3>
-			<h3 class="mb-3">Details : <span th:text="${details}"></span></h3>
-			<h3 class="mb-3">Price : <span th:text="${price}"></span></h3>
-			<h3 class="mb-3">Link : <span th:text="${link}"></span></h3>
-			<h3 class="mb-3">Image : <span></span><img class="img-thumbnail" th:src="'data:image/png,image/jpeg;base64,'+${image}" alt="" height="150" width="150"></h3>
-<!--			<img class='img-thumbnail' th:src="'data:image/png,image/jpeg;base64,'+${image}" alt="">-->
+	        <h3 class="mb-3">Name: <span th:text="${name}"></span></h3>
+			<h3 class="mb-3">Details: <span th:text="${details}"></span></h3>
+			<h3 class="mb-3">Price: <span th:text="${price}"></span></h3>
+			<h3 class="mb-3">Link: <span th:text="${link}"></span></h3>
+			<h3 class="mb-3">Image: </h3><img th:src="${item.image} == null ? @{'data:image/jpeg;base64,'+${imageDefault}} : @{'data:image/jpeg;base64,'+${imageHandler.getImageOfItem(item)}}" class="img-thumbnail"  height="250" >
 	    </div>
 	<div>
 		
