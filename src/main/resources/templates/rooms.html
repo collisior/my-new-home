@@ -80,7 +80,6 @@ div.desc {
 				<a href="#" th:href="@{/rooms/{id}(id = ${room.id})}">
 					<div class="gallery">
 						<div class="desc"><span th:text="${room.name}"> Room Name </span></div>
-<!--						<img th:src="${room.image} == null ? @{'data:image/png,image/jpeg;base64,'+${imageDefault}} : @{'data:image/png,image/jpeg;base64,'+${imageHandler.getImageOfRoom(room)}}" alt="" class="img-thumbnail"  height="250" width="250">-->
 						<img th:src="${room.image} == null ? @{'data:image/jpeg;base64,'+${imageDefault}} : @{'data:image/jpeg;base64,'+${imageHandler.getImageOfRoom(room)}}" width="280">
 						<div class="desc"><span th:text="${room.details}"> Details </span></div>
 						

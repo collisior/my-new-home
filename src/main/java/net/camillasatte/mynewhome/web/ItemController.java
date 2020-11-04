@@ -1,4 +1,4 @@
-package net.springbootapp.web;
+package net.camillasatte.mynewhome.web;
 
 import java.util.List;
 
@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.ui.Model;
 
-import net.springbootapp.model.*;
-import net.springbootapp.service.ItemServiceImplementation;
-import net.springbootapp.service.RoomService;
-import net.springbootapp.service.UserService;
-import net.springbootapp.web.dto.ItemDTO;
+import net.camillasatte.mynewhome.model.*;
+import net.camillasatte.mynewhome.service.ItemServiceImplementation;
+import net.camillasatte.mynewhome.service.RoomService;
+import net.camillasatte.mynewhome.service.UserService;
+import net.camillasatte.mynewhome.web.dto.ItemDTO;
+
+import org.springframework.ui.Model;
 
 @Controller
 @RequestMapping("/newItem")

@@ -65,39 +65,5 @@
 		</div>
 		<button type="submit" class="btn btn-primary btn-block mt-3">Save </button>
 	</form>
-
-	
-<!--
-	
-<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-
-				<div th:if="${param.success}">
-					<div class="alert alert-info">Item was updated.
-						</div>
-				</div>
-
-				<h1>Edit Item </h1>
-			  <div>
-				<form th:action="@{/itemEdit}" th:object="${itemObject}" method="post">
-					<br>
-					<br>
-					<label >Item name: </label>
-					<input type="text" name="name" th:value="${itemObject.name}" th:placeholder="${oldName}"><br>
-					<h3><span th:text="${itemObject.name}"></span></h3>
-					<h3><span th:text="${itemObject.price}"></span></h3>
-					<label >Item price :</label>
-					<input type="text" name="price" th:placeholder="${oldPrice}"><br>
-					<label >Item link:</label>
-					<input type="text" name="link"  th:placeholder="${oldLink}"><br>
-					<button type="submit">Update</button>
-				</form>
-			  </div>
-			</div>
-		</div>
-	</div>
-	
--->
 </body>
 </html>

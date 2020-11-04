@@ -33,12 +33,54 @@
 			</div>
 		</div>
 	</nav>
-
+<br>
 	<br>
-	<br>
-
 	<h1>My Dashboard </h1>
+	
+	<table>
+	  <tr>
+		<th></th>
+		<th></th>
 
+	  </tr>
+	  <tr>
+		<td>Total number of rooms: </td>
+		<td>$ <span th:number="${roomsNumber}">  </span></td>
+	  </tr>
+	  <tr>
+		<td>Total number of items: </td>
+		<td>$ <span th:number="${itemsNumber}">  </span></td>
+	  </tr>
+		<br>
+		<br>
+	</table>
+	<br>
+
+		<table>
+	  <tr>
+		<th>Total</th>
+		<th>$</th>
+
+	  </tr>
+	  <tr>
+		<td>Total Spendings (past+future): </td>
+		<td>$ <span th:number="${total}">  </span></td>
+	  </tr>
+	  <tr>
+		<td>Total Wishlist:</td>
+		<td>$ <span th:number="${totalWishlist}"> </span></td>
+	  </tr>
+			<tr>
+		<td>Total Purchased:</td>
+		<td>$ <span th:number="${totalPurchased}"> </span></td>
+	  </tr>
+			<tr>
+		<td>Total Other:</td>
+		<td>$ <span th:number="${totalOther}"> </span></td>
+	  </tr>
+	</table>
+	
+	
 	<script type="text/javascript"
 		th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
 	<script type="text/javascript"

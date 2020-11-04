@@ -18,11 +18,10 @@
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Welcome page</a>
+				<a class="navbar-brand" href="#" th:href="@{/welcome}">Welcome page</a>
 			</div>
 		</div>
 	</nav>
@@ -61,15 +60,16 @@
 							</div>
 						</div>
 					</div>
-					
+					<br>
 					<div class="form-group">
-						<span>Are you a new user? <a href="/" th:href="@{/registration}">Register
-								here</a></span>
-					</div>
+						<span>Are you a new user? <a href="/" th:href="@{/registration}">Register here</a></span>
+					</div> <br>
+
+					<a href="#" th:href="@{/forgotPassword}"> Forgot Password? </a>
 				</form>
+				<br>
 			</div>
 		</div>
-
 
 	</div>
 

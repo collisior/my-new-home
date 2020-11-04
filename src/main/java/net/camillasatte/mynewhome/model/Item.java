@@ -1,9 +1,9 @@
-package net.springbootapp.model;
+package net.camillasatte.mynewhome.model;
 
 import javax.persistence.*;
 
-import net.springbootapp.ImageHandler;
-import net.springbootapp.web.dto.ItemDTO;
+import net.camillasatte.mynewhome.ImageHandler;
+import net.camillasatte.mynewhome.web.dto.ItemDTO;
 
 
 @Entity
@@ -35,7 +35,14 @@ public class Item implements Comparable<Item>{
     
     public Item() {
     }
-    public Long getId() {
+    
+    public Item(String name, double price) {
+		super();
+		this.name = name;
+		this.price = price;
+	}
+
+	public Long getId() {
         return id;
     }
 
